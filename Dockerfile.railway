@@ -1,0 +1,30 @@
+FROM python:3.11-slim AS builder
+
+RUN pip install uv
+
+WORKDIR /app
+COPY pyproject.toml uv.lock* README.md ./
+COPY src/ ./src/
+
+RUN uv sync --frozen --no-dev
+
+FROM python:3.11-slim
+
+RUN apt-get update && apt-get install -y curl && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get clean
+
+RUN npm install -g @modelcontextprotocol/mcp-proxy
+
+WORKDIR /app
+COPY --from=builder /app/.venv /app/.venv
+COPY src/ ./src/
+COPY pyproject.toml ./
+
+ENV PATH="/app/.venv/bin:$PATH" \
+    PYTHONUNBUFFERED=1
+
+EXPOSE 3000
+
+CMD ["mcp-proxy", "--port", "3000", "--", "python", "-m", "intervals_icu_mcp.server"]
