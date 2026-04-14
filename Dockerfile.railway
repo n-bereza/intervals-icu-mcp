@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y curl && \
     apt-get install -y nodejs && \
     apt-get clean
 
-RUN npm install -g @modelcontextprotocol/mcp-proxy
+RUN npm install -g mcp-proxy
 
 WORKDIR /app
 COPY --from=builder /app/.venv /app/.venv
