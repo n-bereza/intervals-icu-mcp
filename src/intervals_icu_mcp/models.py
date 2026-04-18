@@ -319,7 +319,7 @@ class FitnessSummary(BaseModel):
 class Interval(BaseModel):
     """Activity interval data."""
 
-    id: int | None = None
+    id: str | int | None = None
     type: str | None = None  # e.g., "WORK", "REST", "WARM_UP", "COOL_DOWN"
     start: int | None = None  # Start time in seconds
     end: int | None = None  # End time in seconds
