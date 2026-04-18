@@ -357,11 +357,11 @@ class ICUClient:
         Returns:
             Histogram with power distribution bins
         """
-        response = await self._request("GET", f"/activity/{activity_id}/power-histogram")
-       data = response.json()
-if isinstance(data, list):
-    return Histogram(bins=data)
-return Histogram(**data)
+       response = await self._request("GET", f"/activity/{activity_id}/power-histogram")
+        data = response.json()
+        if isinstance(data, list):
+            return Histogram(bins=data)
+        return Histogram(**data)
 
     async def get_hr_histogram(
         self,
@@ -375,11 +375,11 @@ return Histogram(**data)
         Returns:
             Histogram with HR distribution bins
         """
-        response = await self._request("GET", f"/activity/{activity_id}/hr-histogram")
-       data = response.json()
-if isinstance(data, list):
-    return Histogram(bins=data)
-return Histogram(**data)
+       response = await self._request("GET", f"/activity/{activity_id}/hr-histogram")
+        data = response.json()
+        if isinstance(data, list):
+            return Histogram(bins=data)
+        return Histogram(**data)
     async def get_pace_histogram(
         self,
         activity_id: str,
@@ -392,8 +392,11 @@ return Histogram(**data)
         Returns:
             Histogram with pace distribution bins
         """
-        response = await self._request("GET", f"/activity/{activity_id}/pace-histogram")
-        return Histogram(**response.json())
+       response = await self._request("GET", f"/activity/{activity_id}/hr-histogram")
+        data = response.json()
+        if isinstance(data, list):
+            return Histogram(bins=data)
+        return Histogram(**data)
 
     async def get_gap_histogram(
         self,
@@ -407,11 +410,11 @@ return Histogram(**data)
         Returns:
             Histogram with GAP distribution bins
         """
-        response = await self._request("GET", f"/activity/{activity_id}/gap-histogram")
-       data = response.json()
-if isinstance(data, list):
-    return Histogram(bins=data)
-return Histogram(**data)
+       response = await self._request("GET", f"/activity/{activity_id}/hr-histogram")
+        data = response.json()
+        if isinstance(data, list):
+            return Histogram(bins=data)
+        return Histogram(**data)
 
     # ==================== Wellness Endpoints ====================
 
