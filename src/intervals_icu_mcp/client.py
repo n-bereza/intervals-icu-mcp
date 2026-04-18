@@ -358,7 +358,10 @@ class ICUClient:
             Histogram with power distribution bins
         """
         response = await self._request("GET", f"/activity/{activity_id}/power-histogram")
-        return Histogram(**response.json())
+       data = response.json()
+if isinstance(data, list):
+    return Histogram(bins=data)
+return Histogram(**data)
 
     async def get_hr_histogram(
         self,
@@ -373,8 +376,10 @@ class ICUClient:
             Histogram with HR distribution bins
         """
         response = await self._request("GET", f"/activity/{activity_id}/hr-histogram")
-        return Histogram(**response.json())
-
+       data = response.json()
+if isinstance(data, list):
+    return Histogram(bins=data)
+return Histogram(**data)
     async def get_pace_histogram(
         self,
         activity_id: str,
@@ -403,7 +408,10 @@ class ICUClient:
             Histogram with GAP distribution bins
         """
         response = await self._request("GET", f"/activity/{activity_id}/gap-histogram")
-        return Histogram(**response.json())
+       data = response.json()
+if isinstance(data, list):
+    return Histogram(bins=data)
+return Histogram(**data)
 
     # ==================== Wellness Endpoints ====================
 
