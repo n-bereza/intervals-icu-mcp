@@ -357,12 +357,11 @@ class ICUClient:
         Returns:
             Histogram with power distribution bins
         """
-       response = await self._request("GET", f"/activity/{activity_id}/power-histogram")
+        response = await self._request("GET", f"/activity/{activity_id}/power-histogram")
         data = response.json()
         if isinstance(data, list):
             return Histogram(bins=data)
         return Histogram(**data)
-
     async def get_hr_histogram(
         self,
         activity_id: str,
@@ -375,7 +374,7 @@ class ICUClient:
         Returns:
             Histogram with HR distribution bins
         """
-       response = await self._request("GET", f"/activity/{activity_id}/hr-histogram")
+        response = await self._request("GET", f"/activity/{activity_id}/hr-histogram")
         data = response.json()
         if isinstance(data, list):
             return Histogram(bins=data)
@@ -392,12 +391,11 @@ class ICUClient:
         Returns:
             Histogram with pace distribution bins
         """
-       response = await self._request("GET", f"/activity/{activity_id}/hr-histogram")
+        response = await self._request("GET", f"/activity/{activity_id}/hr-histogram")
         data = response.json()
         if isinstance(data, list):
             return Histogram(bins=data)
         return Histogram(**data)
-
     async def get_gap_histogram(
         self,
         activity_id: str,
@@ -410,14 +408,11 @@ class ICUClient:
         Returns:
             Histogram with GAP distribution bins
         """
-       response = await self._request("GET", f"/activity/{activity_id}/hr-histogram")
+        response = await self._request("GET", f"/activity/{activity_id}/hr-histogram")
         data = response.json()
         if isinstance(data, list):
             return Histogram(bins=data)
         return Histogram(**data)
-
-    # ==================== Wellness Endpoints ====================
-
     async def get_wellness(
         self,
         athlete_id: str | None = None,
