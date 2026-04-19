@@ -419,7 +419,7 @@ class HistogramBin(BaseModel):
 
     min: float  # Minimum value for this bin
     max: float  # Maximum value for this bin
-    count: int  # Number of data points in this bin
+    count: int | None = None  # Number of data points in this bin
     secs: int | None = None  # Time spent in this bin (seconds)
 
 
